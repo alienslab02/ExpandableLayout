@@ -2,10 +2,13 @@ package com.andexert.expandablelayout;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
+import com.andexert.expandablelayout.library.ExpandableLayout;
+import com.andexert.expandablelayout.library.ExpandableLayoutAnimationListener;
 import com.andexert.expandablelayout.library.ExpandableLayoutListView;
 
 
@@ -18,10 +21,26 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Expandable List
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.view_row, R.id.header_text, array);
         final ExpandableLayoutListView expandableLayoutListView = (ExpandableLayoutListView) findViewById(R.id.listview);
 
         expandableLayoutListView.setAdapter(arrayAdapter);
+
+        // ExpandableLayout
+        ExpandableLayout layout = (ExpandableLayout) findViewById(R.id.first);
+        layout.setAnimationListener(new ExpandableLayoutAnimationListener() {
+            @Override
+            public void onContentExpand() {
+                Log.d("Expandable", "Content Expanded ");
+            }
+
+            @Override
+            public void onContentCollapse() {
+
+                Log.d("Expandable", "Content Collapsed ");
+            }
+        });
     }
 
 
